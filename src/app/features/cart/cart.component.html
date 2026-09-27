@@ -1,0 +1,318 @@
+@if (cartDetailsData().products) {
+  <section>
+    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <!-- ==================== Header ==================== -->
+      <div class="mb-8">
+        <!-- Breadcrumb -->
+        <nav class="mb-5 flex items-center gap-2 text-sm text-gray-500">
+          <a routerLink="/" class="transition hover:text-main-color"> Home </a>
+
+          <span>/</span>
+
+          <span class="font-medium text-text"> Shopping Cart </span>
+        </nav>
+
+        <!-- Title -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="flex items-center gap-3 text-3xl font-bold text-text sm:text-4xl">
+              <span
+                class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-main-color text-white shadow-sm shadow-main-color/20"
+              >
+                <i class="fa-solid fa-cart-shopping text-lg"></i>
+              </span>
+
+              Shopping Cart
+            </h1>
+
+            <p class="mt-2 text-gray-500">
+              You have
+              <span class="font-semibold text-main-color">
+                {{ cartDetailsData().products?.length }} item
+              </span>
+              in your cart
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== Main Content ==================== -->
+      @if (cartDetailsData().products?.length) {
+        <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-3">
+          <!-- ==================== Cart Items ==================== -->
+          <div class="min-w-0 lg:col-span-2">
+            <div class="space-y-4">
+              @for (item of cartDetailsData().products; track item._id) {
+                <!-- Cart Item -->
+                <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm sm:p-5">
+                  <div class="flex gap-4 sm:gap-6">
+                    <!-- Product Image -->
+                    <a
+                      routerLink="/details/woman-shawl/6428ead5dc1175abc65ca0ad"
+                      class="group relative shrink-0"
+                    >
+                      <div
+                        class="size-28 overflow-hidden rounded-xl border border-gray-100 bg-gray-50 p-3 sm:size-32"
+                      >
+                        <img
+                          [src]="item.product.imageCover"
+                          [alt]="item.product.title"
+                          [title]="item.product.title"
+                          class="size-full object-contain transition-transform duration-300 group-hover:scale-110"
+                        />
+                      </div>
+                    </a>
+
+                    <!-- Product Information -->
+                    <div class="flex min-w-0 flex-1 flex-col">
+                      <!-- Stock Status -->
+                      @if (item.product.quantity > 0) {
+                        <span
+                          class="my-2 flex w-fit items-center gap-2 rounded-full bg-second-color/80 px-2 py-1 text-xs font-bold text-white"
+                        >
+                          <i class="fa-solid fa-check"></i>
+                          In Stock
+                        </span>
+                      } @else {
+                        <span
+                          class="my-2 flex w-fit items-center gap-2 rounded-full bg-rose-600 px-2 py-1 text-xs font-bold text-white"
+                        >
+                          <i class="fa-solid fa-circle-xmark"></i>
+                          Out Of Stock
+                        </span>
+                      }
+
+                      <!-- Product Name -->
+                      <div class="mb-3">
+                        <a
+                          routerLink="/details/woman-shawl/6428ead5dc1175abc65ca0ad"
+                          class="group/title"
+                        >
+                          <h3
+                            class="text-base font-semibold leading-relaxed text-text transition-colors group-hover/title:text-main-color sm:text-lg"
+                          >
+                            {{ item.product.title }}
+                          </h3>
+                        </a>
+
+                        <!-- Category -->
+                        <div class="mt-2 flex items-center gap-2">
+                          <span
+                            class="flex items-center rounded-full bg-main-color/10 px-2.5 py-1 text-xs font-medium text-main-color"
+                          >
+                            {{ item.product.category.name }}
+                          </span>
+                          <span class="text-xs font-semibold"
+                            >SKU:
+                            {{ item.product._id.split('').slice(-6).join('').toUpperCase() }}</span
+                          >
+                        </div>
+                      </div>
+
+                      <!-- Price -->
+                      <div class="mb-4">
+                        <span class="text-lg font-bold text-main-color">
+                          {{ item.price | currency: 'GBP' }}
+                        </span>
+                      </div>
+
+                      <!-- Bottom Actions -->
+                      <div class="mt-auto flex flex-wrap items-center justify-between gap-4">
+                        <!-- Quantity -->
+                        <div
+                          class="flex items-center rounded-xl border border-gray-200 bg-gray-50 p-1"
+                        >
+                          <!-- Minus -->
+                          <button
+                            (click)="
+                              updateProductItemQuantityFromCart(item.product._id, item.count - 1)
+                            "
+                            type="button"
+                            class="cursor-pointer flex size-8 items-center justify-center rounded-lg bg-white text-gray-500 shadow-sm transition-all hover:text-text disabled:cursor-not-allowed disabled:opacity-40"
+                            aria-label="Decrease quantity"
+                          >
+                            <i class="fa-solid fa-minus text-xs"></i>
+                          </button>
+
+                          <!-- Quantity -->
+                          <span class="w-12 text-center font-bold text-text">
+                            {{ item.count }}
+                          </span>
+
+                          <!-- Plus -->
+                          <button
+                            (click)="
+                              updateProductItemQuantityFromCart(item.product._id, item.count + 1)
+                            "
+                            type="button"
+                            class="flex size-8 cursor-pointer items-center justify-center rounded-lg bg-main-color text-white shadow-sm transition-all hover:bg-main-color/90"
+                            aria-label="Increase quantity"
+                          >
+                            <i class="fa-solid fa-plus text-xs"></i>
+                          </button>
+                        </div>
+
+                        <!-- Total + Remove -->
+                        <div class="flex items-center gap-4">
+                          <!-- Total -->
+                          <div class="text-right">
+                            <p class="mb-0.5 text-xs text-gray-400">Total</p>
+
+                            <p class="text-xl font-bold text-text">
+                              {{ item.price * item.count | currency: 'GBP' }}
+                            </p>
+                          </div>
+
+                          <!-- Remove -->
+                          <button
+                            (click)="removeProductItemFromCart(item.product._id)"
+                            type="button"
+                            title="Remove item"
+                            class="flex size-10 cursor-pointer items-center justify-center rounded-xl border border-red-200 bg-red-50 text-red-500 transition-all duration-200 hover:border-red-500 hover:bg-red-500 hover:text-white"
+                          >
+                            <i class="fa-solid fa-trash text-sm"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ==================== Cart Footer ==================== -->
+                @if ($last) {
+                  <div class="flex items-center justify-between border-t border-gray-200 pt-6">
+                    <!-- Continue Shopping -->
+                    <a
+                      routerLink="/shop"
+                      class="flex items-center gap-2 text-sm font-medium text-main-color transition hover:text-main-color/80"
+                    >
+                      <i class="fa-solid fa-arrow-left text-xs"></i>
+
+                      Continue Shopping
+                    </a>
+
+                    <!-- Clear Cart -->
+                    <button
+                      (click)="clearAllItemsFromCart()"
+                      type="button"
+                      class="group flex cursor-pointer items-center gap-2 text-sm text-gray-400 transition-colors hover:text-red-500"
+                    >
+                      <i
+                        class="fa-solid fa-trash text-xs transition-transform group-hover:scale-110"
+                      ></i>
+
+                      <span> Clear all items </span>
+                    </button>
+                  </div>
+                }
+              }
+            </div>
+          </div>
+
+          <!-- ==================== Order Summary ==================== -->
+          <div class="min-w-0 lg:col-span-1">
+            <div
+              class="sticky top-24 overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm"
+            >
+              <!-- Summary Header -->
+              <div class="bg-text p-5">
+                <h2 class="text-lg font-bold text-white">Order Summary</h2>
+              </div>
+
+              <!-- Summary Body -->
+              <div class="space-y-4 p-5">
+                <!-- Subtotal -->
+                <div class="flex justify-between gap-4 text-gray-600">
+                  <span> Subtotal ({{ cartDetailsData().products?.length }} items) </span>
+
+                  <span class="shrink-0 font-semibold text-text">
+                    {{ cartDetailsData().totalCartPrice | currency: 'GBP' }}
+                  </span>
+                </div>
+
+                <!-- Shipping -->
+                <div class="flex justify-between gap-4 text-gray-600">
+                  <span> Shipping </span>
+
+                  <span class="shrink-0 font-semibold text-second-color"> Free </span>
+                </div>
+
+                <hr class="border-gray-200" />
+
+                <!-- Estimated Total -->
+                <div class="flex items-center justify-between gap-4 text-lg font-bold">
+                  <span class="text-text"> Estimated Total </span>
+
+                  <span class="shrink-0 text-main-color">
+                    {{ cartDetailsData().totalCartPrice | currency: 'GBP' }}
+                  </span>
+                </div>
+
+                <!-- Checkout -->
+                <div class="space-y-3 pt-4">
+                  <button
+                    [routerLink]="['/checkout', cartDetailsData()._id]"
+                    class="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-main-color py-3.5 font-semibold text-white shadow-sm shadow-main-color/20 transition-all hover:-translate-y-0.5 hover:bg-main-color/90 hover:shadow-md"
+                  >
+                    <i class="fa-solid fa-lock"></i>
+
+                    Secure Checkout
+                  </button>
+
+                  <p class="text-center text-xs text-gray-400">
+                    <a routerLink="/shop" class="font-medium text-main-color hover:underline">
+                      ← Continue Shopping
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      } @else {
+        <!-- ==================== Empty Cart ==================== -->
+        <div class="flex min-h-125 items-center justify-center">
+          <div class="mx-auto flex w-full max-w-xl flex-col items-center text-center">
+            <!-- Icon -->
+            <div
+              class="mb-7 flex size-24 items-center justify-center rounded-full bg-main-color/10 sm:size-28"
+            >
+              <div
+                class="flex size-16 items-center justify-center rounded-full bg-main-color/15 text-main-color sm:size-20"
+              >
+                <i class="fa-solid fa-cart-shopping text-3xl sm:text-4xl"></i>
+              </div>
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-2xl font-bold text-text sm:text-3xl">Your cart is empty</h1>
+
+            <!-- Description -->
+            <p class="mt-3 max-w-md text-sm leading-6 text-gray-500 sm:text-base">
+              Looks like you haven't added anything to your cart yet. Explore our collection and
+              find something you'll love.
+            </p>
+
+            <!-- Button -->
+            <a
+              routerLink="/shop"
+              class="mt-7 inline-flex items-center justify-center gap-2 rounded-xl bg-main-color px-7 py-3.5 text-sm font-semibold text-white shadow-sm shadow-main-color/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-main-color/90 hover:shadow-md"
+            >
+              <i class="fa-solid fa-bag-shopping"></i>
+
+              Start Shopping
+            </a>
+
+            <!-- Continue Home -->
+            <a
+              routerLink="/"
+              class="mt-4 text-sm font-medium text-gray-400 transition hover:text-main-color"
+            >
+              Continue to Home
+            </a>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+}

@@ -1,0 +1,37 @@
+<!-- category details -->
+<section class="py-8">
+  <div class="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+    @for (categorySub of CategoryDetailsList(); track categorySub._id) {
+      <div
+        class="group min-h-48 cursor-pointer rounded-xl border border-gray-100 bg-white px-5 py-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-main-color/30 hover:shadow-md"
+      >
+        <div class="flex flex-col justify-center items-center">
+          <!-- Icon -->
+          <div
+            class="mb-4 flex size-14 items-center justify-center rounded-full bg-main-color/10 transition-all duration-300 group-hover:bg-main-color"
+          >
+            <i
+              class="fa-solid fa-folder text-xl text-main-color transition-colors duration-300 group-hover:text-white"
+            ></i>
+          </div>
+
+          <!-- Name -->
+          <span
+            class="text-center text-base font-semibold text-gray-700 transition-colors duration-300 group-hover:text-main-color"
+          >
+            {{ categorySub.name }}
+          </span>
+        </div>
+        <!-- Browse Products -->
+        <span
+          [routerLink]="['/products']"
+          [queryParams]="{ subcategory: categorySub._id }"
+          class="mt-3 flex items-center gap-3 border-transparent text-sm text-gray-400 transition-all duration-300 group-hover:border-main-color group-hover:text-main-color"
+        >
+          <span> Browse Products</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </span>
+      </div>
+    }
+  </div>
+</section>

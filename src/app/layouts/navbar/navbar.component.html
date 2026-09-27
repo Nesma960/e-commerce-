@@ -1,0 +1,325 @@
+<nav class="sticky top-0 z-50 border-b border-gray-100 bg-white/95 backdrop-blur-md">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- ==================== Main Navbar ==================== -->
+    <div class="flex h-20 items-center justify-between gap-6">
+      <!-- Logo -->
+      <a
+        routerLink="/"
+        class="shrink-0 text-2xl font-bold tracking-tight text-main-color transition duration-300 hover:opacity-80"
+      >
+        Marto
+      </a>
+
+      <!-- Search -->
+      <div class="hidden flex-1 md:block md:max-w-xl">
+        <div class="group relative">
+          <i
+            class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-sm text-gray-400 transition duration-300 group-focus-within:text-main-color"
+          ></i>
+
+          <input
+            type="search"
+            placeholder="Search for products..."
+            class="w-full rounded-full border border-gray-200 bg-gray-50 py-3 pl-11 pr-4 text-sm text-gray-700 outline-none transition duration-300 placeholder:text-gray-400 focus:border-main-color focus:bg-white focus:ring-4 focus:ring-main-color/10"
+          />
+        </div>
+      </div>
+
+      <!-- ==================== Actions ==================== -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <!-- Wishlist -->
+        <button
+          routerLink="/wishlist"
+          type="button"
+          class="group relative hidden size-10 cursor-pointer items-center justify-center rounded-full text-gray-600 transition duration-300 hover:bg-main-color/10 hover:text-main-color sm:flex"
+          aria-label="Wishlist"
+        >
+          <i class="fa-regular fa-heart text-lg"></i>
+
+          <span
+            class="absolute right-0 top-0 flex size-4 items-center justify-center rounded-full bg-main-color text-[9px] font-bold text-white"
+          >
+            0
+          </span>
+        </button>
+
+        <!-- Cart -->
+        <button
+          routerLink="/cart"
+          type="button"
+          class="group relative flex size-10 cursor-pointer items-center justify-center rounded-full text-gray-600 transition duration-300 hover:bg-second-color/15 hover:text-second-color"
+          aria-label="Shopping cart"
+        >
+          <i class="fa-solid fa-bag-shopping text-lg"></i>
+
+          <span
+            class="absolute right-0 top-0 flex size-4 items-center justify-center rounded-full bg-second-color text-[9px] font-bold text-white"
+          >
+            {{ count() }}
+          </span>
+        </button>
+        @if (logged()) {
+          <!-- signOut -->
+          <button
+            (click)="logOut()"
+            class="hidden cursor-pointer rounded-full px-4 py-2 text-sm font-medium text-gray-600 transition duration-300 hover:bg-gray-50 hover:text-main-color lg:block"
+          >
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            signOut
+          </button>
+        } @else {
+          <!-- Login -->
+          <a
+            routerLink="/login"
+            class="hidden rounded-full px-4 py-2 text-sm font-medium text-gray-600 transition duration-300 hover:bg-gray-50 hover:text-main-color lg:block"
+          >
+            Login
+          </a>
+
+          <!-- Register -->
+          <a
+            routerLink="/register"
+            class="hidden rounded-full bg-main-color px-5 py-2.5 text-sm font-medium text-white shadow-sm shadow-main-color/20 transition duration-300 hover:-translate-y-0.5 hover:bg-main-color/90 hover:shadow-md lg:block"
+          >
+            Register
+          </a>
+        }
+
+        <!-- ==================== Mobile Menu Button ==================== -->
+        <button
+          id="mobileMenuButton"
+          data-collapse-toggle="mobileMenu"
+          type="button"
+          class="flex size-10 cursor-pointer items-center justify-center rounded-full text-gray-600 transition duration-300 hover:bg-gray-100 hover:text-main-color lg:hidden"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+          aria-label="Open menu"
+        >
+          <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== Desktop Categories ==================== -->
+    <div class="hidden items-center justify-center border-t border-gray-50 lg:flex">
+      <div class="flex items-center gap-8 py-3">
+        <!-- Home -->
+        <a routerLink="/" class="text-sm font-medium text-main-color"> Home </a>
+
+        <!-- Shop -->
+        <a
+          routerLink="/shop"
+          class="text-sm font-medium text-gray-500 transition duration-300 hover:text-main-color"
+        >
+          Shop
+        </a>
+
+        <!-- ==================== Categories Dropdown ==================== -->
+        <div class="relative">
+          <button
+            id="categoriesDropdownButton"
+            data-dropdown-toggle="categoriesDropdown"
+            data-dropdown-placement="bottom"
+            type="button"
+            class="flex cursor-pointer items-center text-sm font-medium text-gray-500 transition duration-300 hover:text-main-color"
+            aria-expanded="false"
+          >
+            Categories
+
+            <svg
+              class="ms-1.5 h-4 w-4"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m19 9-7 7-7-7"
+              />
+            </svg>
+          </button>
+
+          <!-- Dropdown -->
+          <div
+            id="categoriesDropdown"
+            class="z-50 hidden w-52 rounded-xl border border-gray-100 bg-white p-2 shadow-lg shadow-gray-200/50"
+          >
+            <a
+              routerLink="/categories"
+              class="block rounded-lg px-4 py-2.5 text-sm text-gray-600 transition duration-200 hover:bg-main-color/10 hover:text-main-color"
+            >
+              All Categories
+            </a>
+
+            <a
+              routerLink="/categories/men"
+              class="block rounded-lg px-4 py-2.5 text-sm text-gray-600 transition duration-200 hover:bg-main-color/10 hover:text-main-color"
+            >
+              Men
+            </a>
+
+            <a
+              routerLink="/categories/women"
+              class="block rounded-lg px-4 py-2.5 text-sm text-gray-600 transition duration-200 hover:bg-main-color/10 hover:text-main-color"
+            >
+              Women
+            </a>
+
+            <a
+              routerLink="/categories/electronics"
+              class="block rounded-lg px-4 py-2.5 text-sm text-gray-600 transition duration-200 hover:bg-main-color/10 hover:text-main-color"
+            >
+              Electronics
+            </a>
+
+            <a
+              routerLink="/categories/home"
+              class="block rounded-lg px-4 py-2.5 text-sm text-gray-600 transition duration-200 hover:bg-main-color/10 hover:text-main-color"
+            >
+              Home & Lifestyle
+            </a>
+          </div>
+        </div>
+
+        <!-- Brands -->
+        <a
+          routerLink="/brands"
+          class="text-sm font-medium text-gray-500 transition duration-300 hover:text-main-color"
+        >
+          Brands
+        </a>
+      </div>
+    </div>
+
+    <!-- ==================== Mobile Menu ==================== -->
+    <div id="mobileMenu" class="hidden border-t border-gray-100 py-4 lg:hidden">
+      <div class="flex flex-col gap-1">
+        <!-- Home -->
+        <a
+          routerLink="/"
+          class="rounded-lg px-4 py-3 text-sm font-medium text-main-color transition hover:bg-main-color/10"
+        >
+          Home
+        </a>
+
+        <!-- Shop -->
+        <a
+          routerLink="/shop"
+          class="rounded-lg px-4 py-3 text-sm font-medium text-gray-600 transition hover:bg-main-color/10 hover:text-main-color"
+        >
+          Shop
+        </a>
+
+        <!-- Mobile Categories Button -->
+        <button
+          id="mobileCategoriesButton"
+          data-collapse-toggle="mobileCategories"
+          type="button"
+          class="flex w-full cursor-pointer items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-gray-600 transition hover:bg-main-color/10 hover:text-main-color"
+          aria-controls="mobileCategories"
+          aria-expanded="false"
+        >
+          <span>Categories</span>
+
+          <svg
+            class="h-4 w-4"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m19 9-7 7-7-7"
+            />
+          </svg>
+        </button>
+
+        <!-- Mobile Categories -->
+        <div id="mobileCategories" class="hidden space-y-1 px-3">
+          <a
+            routerLink="/categories"
+            class="block rounded-lg px-4 py-2.5 text-sm text-gray-500 transition hover:bg-main-color/10 hover:text-main-color"
+          >
+            All Categories
+          </a>
+
+          <a
+            routerLink="/categories/men"
+            class="block rounded-lg px-4 py-2.5 text-sm text-gray-500 transition hover:bg-main-color/10 hover:text-main-color"
+          >
+            Men
+          </a>
+
+          <a
+            routerLink="/categories/women"
+            class="block rounded-lg px-4 py-2.5 text-sm text-gray-500 transition hover:bg-main-color/10 hover:text-main-color"
+          >
+            Women
+          </a>
+
+          <a
+            routerLink="/categories/electronics"
+            class="block rounded-lg px-4 py-2.5 text-sm text-gray-500 transition hover:bg-main-color/10 hover:text-main-color"
+          >
+            Electronics
+          </a>
+
+          <a
+            routerLink="/categories/home"
+            class="block rounded-lg px-4 py-2.5 text-sm text-gray-500 transition hover:bg-main-color/10 hover:text-main-color"
+          >
+            Home & Lifestyle
+          </a>
+        </div>
+
+        <!-- Brands -->
+        <a
+          routerLink="/brands"
+          class="rounded-lg px-4 py-3 text-sm font-medium text-gray-600 transition hover:bg-main-color/10 hover:text-main-color"
+        >
+          Brands
+        </a>
+
+        <!-- Mobile Auth -->
+        <div class="mt-3 flex gap-2 border-t border-gray-100 pt-4">
+          <a
+            routerLink="/login"
+            class="flex-1 rounded-lg border border-gray-200 px-4 py-2.5 text-center text-sm font-medium text-gray-600 transition hover:border-main-color hover:text-main-color"
+          >
+            Login
+          </a>
+
+          <a
+            routerLink="/register"
+            class="flex-1 rounded-lg bg-main-color px-4 py-2.5 text-center text-sm font-medium text-white transition hover:bg-main-color/90"
+          >
+            Register
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== Mobile Search ==================== -->
+    <div class="pb-4 md:hidden">
+      <div class="group relative">
+        <i
+          class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-sm text-gray-400 transition duration-300 group-focus-within:text-main-color"
+        ></i>
+
+        <input
+          type="search"
+          placeholder="Search for products..."
+          class="w-full rounded-full border border-gray-200 bg-gray-50 py-3 pl-11 pr-4 text-sm text-gray-700 outline-none transition duration-300 placeholder:text-gray-400 focus:border-main-color focus:bg-white focus:ring-4 focus:ring-main-color/10"
+        />
+      </div>
+    </div>
+  </div>
+</nav>

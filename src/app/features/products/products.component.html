@@ -1,0 +1,128 @@
+<!-- Specific brand  -->
+<div class="container mx-auto px-4 py-8">
+  <!-- ==================== Active Filters ==================== -->
+  <div class="mb-6 flex flex-wrap items-center gap-3">
+    <span class="flex items-center gap-2 text-sm text-gray-600">
+      <i class="fa-solid fa-filter text-main-color"></i>
+      Active Filters:
+    </span>
+
+    <!-- Active Filter -->
+    <a
+      href="#"
+      class="inline-flex items-center gap-2 rounded-full bg-main-color/10 px-3 py-1.5 text-sm font-medium text-main-color transition-colors hover:bg-main-color/20"
+    >
+      <i class="fa-solid fa-tags text-xs"></i>
+
+      <span>Electronics</span>
+
+      <i class="fa-solid fa-xmark text-xs"></i>
+    </a>
+
+    <!-- Clear Filters -->
+    <a href="#" class="text-sm text-gray-500 underline transition hover:text-main-color">
+      Clear all
+    </a>
+  </div>
+
+  <!-- ==================== Results Count ==================== -->
+  <div class="mb-6 flex items-center justify-between">
+    <p class="text-sm text-gray-500">
+      Showing
+      <span class="font-semibold text-gray-700">2</span>
+      products
+    </p>
+  </div>
+
+  <!-- ==================== Products Grid ==================== -->
+  <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 md:grid-cols-4 lg:grid-cols-5">
+    <!-- ==================== Product Card ==================== -->
+    <div
+      class="group overflow-hidden rounded-xl border border-gray-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-main-color/20 hover:shadow-lg hover:shadow-main-color/5"
+    >
+      <!-- Product Image -->
+      <div class="relative overflow-hidden bg-white">
+        <img
+          src="https://ecommerce.routemisr.com/Route-Academy-products/1678301723274-cover.jpeg"
+          alt="Victus 16-D1016Ne Laptop"
+          class="h-60 w-full object-contain p-3 transition duration-500 group-hover:scale-105"
+        />
+
+        <!-- Product Actions -->
+        <div class="absolute right-3 top-3 flex flex-col gap-2">
+          <!-- Wishlist -->
+          <button
+            type="button"
+            aria-label="Add to wishlist"
+            class="flex h-9 w-9 items-center justify-center rounded-full bg-white text-gray-500 shadow-sm transition hover:bg-main-color hover:text-white"
+          >
+            <i class="fa-regular fa-heart"></i>
+          </button>
+
+          <!-- Compare -->
+          <button
+            type="button"
+            aria-label="Compare product"
+            class="flex h-9 w-9 items-center justify-center rounded-full bg-white text-gray-500 shadow-sm transition hover:bg-main-color hover:text-white"
+          >
+            <i class="fa-solid fa-arrows-rotate text-sm"></i>
+          </button>
+
+          <!-- View Details -->
+          <a
+            href="#"
+            aria-label="View product"
+            class="flex h-9 w-9 items-center justify-center rounded-full bg-white text-gray-500 shadow-sm transition hover:bg-main-color hover:text-white"
+          >
+            <i class="fa-regular fa-eye"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Product Information -->
+      <div class="p-4">
+        <!-- Category -->
+        <p class="mb-1 text-xs font-medium text-gray-400">Electronics</p>
+
+        <!-- Product Name -->
+        <h3 class="mb-2 min-h-10 text-sm font-semibold leading-5 text-gray-800">
+          <a href="#" class="line-clamp-2 transition hover:text-main-color">
+            Victus 16-D1016Ne Laptop With 16-Inch Display Core I7-12700H Processor 16Gb Ram 1Tb
+            Nvidia Geforce Rtx3050 Ti Graphics
+          </a>
+        </h3>
+
+        <!-- Rating -->
+        <div class="mb-3 flex items-center gap-2">
+          <div class="flex items-center gap-0.5 text-xs text-amber-400">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+          </div>
+
+          <span class="text-xs text-gray-400"> 3 (5) </span>
+        </div>
+
+        <!-- Price + Cart -->
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <span class="text-lg font-bold text-gray-800"> 42,960 </span>
+
+            <span class="ml-1 text-xs font-medium text-gray-400"> EGP </span>
+          </div>
+
+          <!-- Add To Cart -->
+          <button
+            type="button"
+            aria-label="Add to cart"
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-main-color text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-main-color/90 hover:shadow-md disabled:opacity-50"
+          >
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

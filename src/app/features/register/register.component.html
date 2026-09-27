@@ -1,0 +1,346 @@
+<section class="py-12">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Left Side -->
+      <div class="flex flex-col gap-7">
+        <!-- Title -->
+        <div class="flex flex-col gap-3">
+          <h2 class="font-extrabold text-3xl sm:text-4xl">
+            Welcome to
+            <span class="text-main-color">MartoCart</span>
+          </h2>
+
+          <p class="text-text-color font-semibold text-sm sm:text-base leading-6">
+            Join thousands of happy customers who enjoy fresh groceries delivered right to their
+            doorstep.
+          </p>
+        </div>
+
+        <!-- Features -->
+        <div class="flex flex-col gap-5">
+          <!-- Premium Quality -->
+          <div class="flex items-center gap-4">
+            <div
+              class="shrink-0 size-11 bg-main-color/20 text-second-color flex items-center justify-center rounded-full"
+            >
+              <i class="fa-solid fa-star"></i>
+            </div>
+
+            <div>
+              <strong class="block"> Premium Quality </strong>
+
+              <p class="text-sm font-semibold text-text-color mt-1">
+                Premium quality products sourced from trusted suppliers.
+              </p>
+            </div>
+          </div>
+
+          <!-- Fast Delivery -->
+          <div class="flex items-center gap-4">
+            <div
+              class="shrink-0 size-11 bg-main-color/20 text-second-color flex items-center justify-center rounded-full"
+            >
+              <i class="fa-solid fa-truck-fast"></i>
+            </div>
+
+            <div>
+              <strong class="block"> Fast Delivery </strong>
+
+              <p class="text-sm font-semibold text-text-color mt-1">
+                Same-day delivery available in most areas.
+              </p>
+            </div>
+          </div>
+
+          <!-- Secure Shopping -->
+          <div class="flex items-center gap-4">
+            <div
+              class="shrink-0 size-11 bg-main-color/20 text-second-color flex items-center justify-center rounded-full"
+            >
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div>
+              <strong class="block"> Secure Shopping </strong>
+
+              <p class="text-sm font-semibold text-text-color mt-1">
+                Your data and payments are completely secure.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial -->
+        <div
+          class="bg-white/70 border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow duration-300"
+        >
+          <!-- Author -->
+          <div class="flex items-center gap-3 mb-4">
+            <img
+              src="/assets/images/review-author.png"
+              alt="Sarah Johnson"
+              class="size-14 rounded-full object-cover"
+            />
+
+            <div class="flex flex-col gap-1">
+              <strong> Sarah Johnson </strong>
+
+              <div class="flex items-center gap-1 text-amber-300">
+                <i class="fa-solid fa-star text-sm"></i>
+                <i class="fa-solid fa-star text-sm"></i>
+                <i class="fa-solid fa-star text-sm"></i>
+                <i class="fa-solid fa-star text-sm"></i>
+                <i class="fa-solid fa-star text-sm"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review -->
+          <blockquote class="text-sm font-medium text-text-color leading-6">
+            "MartoCart has transformed my shopping experience. The quality of the products is
+            outstanding, and the delivery is always on time. Highly recommend!"
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- Right Side - Signup Form -->
+      <div class="flex items-center justify-center">
+        <div
+          class="w-full max-w-md rounded-3xl border border-main-color bg-white p-6 sm:p-8 shadow-sm"
+        >
+          <!-- Form Header -->
+          <div class="mb-7">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900">Create an account</h2>
+            <p class="mt-2 text-sm font-medium text-text-color">
+              Join MartoCart and enjoy a better shopping experience.
+            </p>
+          </div>
+          <!-- Form -->
+          <form class="space-y-5" [formGroup]="registerForm" (ngSubmit)="submitForm()">
+            <!-- Name -->
+            <div>
+              @let nameControl = registerForm.get('name');
+              <div>
+                <label for="name" class="mb-2 block text-sm font-semibold text-gray-800">
+                  Full Name
+                </label>
+                <div class="relative">
+                  <i
+                    class="fa-regular fa-user absolute left-4 top-1/2 -translate-y-1/2 text-text-color"
+                  ></i>
+                  <input
+                    id="name"
+                    type="text"
+                    placeholder="Enter your name"
+                    formControlName="name"
+                    class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm outline-none transition focus:border-main-color focus:bg-white focus:ring-2 focus:ring-main-color/20"
+                  />
+                </div>
+              </div>
+              <!-- alert -->
+              @if (nameControl?.invalid && nameControl?.touched) {
+                <div
+                  class="flex px-4 py-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft border border-fg-danger-strong mt-2"
+                  role="alert"
+                >
+                  <span class="sr-only">Danger</span>
+                  <div>
+                    <ul>
+                      @if (nameControl?.hasError('required')) {
+                        <li>Full Name is required.</li>
+                      } @else if (nameControl?.hasError('minlength')) {
+                        <li>Name must be at least 3 characters</li>
+                      }
+                    </ul>
+                  </div>
+                </div>
+              }
+            </div>
+            <!-- Email -->
+            <div>
+              @let emailControl = registerForm.get('email');
+              <div>
+                <label for="email" class="mb-2 block text-sm font-semibold text-gray-800">
+                  Email Address
+                </label>
+                <div class="relative">
+                  <i
+                    class="fa-regular fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-text-color"
+                  ></i>
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    formControlName="email"
+                    class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm outline-none transition focus:border-main-color focus:border-2 focus:bg-white focus:ring-0"
+                  />
+                </div>
+              </div>
+              <!-- alret -->
+              @if (emailControl?.invalid && emailControl?.touched) {
+                <div
+                  class="flex px-4 py-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft border border-fg-danger-strong mt-2"
+                  role="alert"
+                >
+                  <span class="sr-only">Danger</span>
+                  <div>
+                    <ul>
+                      @if (emailControl?.hasError('required')) {
+                        <li>Email is required.</li>
+                      } @else if (emailControl?.hasError('email')) {
+                        <li>Please enter valid email address</li>
+                      }
+                    </ul>
+                  </div>
+                </div>
+              }
+            </div>
+            <!-- Password -->
+            <div>
+              @let passwordControl = registerForm.get('password');
+              <div>
+                <label for="password" class="mb-2 block text-sm font-semibold text-gray-800">
+                  Password
+                </label>
+                <div class="relative">
+                  <i
+                    class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-text-color"
+                  ></i>
+                  <input
+                    id="password"
+                    type="password"
+                    placeholder="Create a password"
+                    formControlName="password"
+                    class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm outline-none transition focus:border-2 focus:border-main-color focus:bg-white focus:ring-2 focus:ring-main-color/20"
+                  />
+                </div>
+              </div>
+              <!-- alret -->
+              @if (passwordControl?.invalid && passwordControl?.touched) {
+                <div
+                  class="flex px-4 py-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft border border-fg-danger-strong mt-2"
+                  role="alert"
+                >
+                  <span class="sr-only">Danger</span>
+                  <div>
+                    <ul>
+                      @if (passwordControl?.hasError('required')) {
+                        <li>Password is required.</li>
+                      } @else if (passwordControl?.hasError('pattern')) {
+                        <li>
+                          Password must minimum eight character, at least one upper case, one lower
+                          case, one number and one special character
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                </div>
+              }
+            </div>
+            <!-- Confirm Password -->
+            <div>
+              @let rePasswordControl = registerForm.get('rePassword');
+              <div>
+                <label for="confirmPassword" class="mb-2 block text-sm font-semibold text-gray-800">
+                  Confirm Password
+                </label>
+                <div class="relative">
+                  <i
+                    class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-text-color"
+                  ></i>
+                  <input
+                    id="confirmPassword"
+                    type="password"
+                    placeholder="Confirm your password"
+                    formControlName="rePassword"
+                    class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm outline-none transition focus:border-2 focus:border-main-color focus:bg-white focus:ring-2 focus:ring-main-color/20"
+                  />
+                </div>
+              </div>
+              <!-- alret -->
+              @if (rePasswordControl?.invalid && rePasswordControl?.touched) {
+                <div
+                  class="flex px-4 py-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft border border-fg-danger-strong"
+                  role="alert"
+                >
+                  <span class="sr-only">Danger</span>
+                  <div>
+                    <ul>
+                      @if (rePasswordControl?.hasError('required')) {
+                        <li>Please confirm your password.</li>
+                      } @else if (rePasswordControl?.hasError('mismatch')) {
+                        <li>Passwords do not match.</li>
+                      }
+                    </ul>
+                  </div>
+                </div>
+              }
+            </div>
+            <!-- phone -->
+            <div>
+              @let phoneControl = registerForm.get('phone');
+              <div>
+                <label for="phone" class="mb-2 block text-sm font-semibold text-gray-800">
+                  Phone
+                </label>
+                <div class="relative">
+                  <i
+                    class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-text-color"
+                  ></i>
+                  <input
+                    id="phone"
+                    type="phone"
+                    placeholder="Enter your phone"
+                    formControlName="phone"
+                    class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm outline-none transition focus:border-main-color focus:bg-white focus:ring-2 focus:ring-main-color/20"
+                  />
+                </div>
+              </div>
+              <!-- alret -->
+              @if (phoneControl?.invalid && phoneControl?.touched) {
+                <div
+                  class="flex px-4 py-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft border border-fg-danger-strong mt-2"
+                  role="alert"
+                >
+                  <span class="sr-only">Danger</span>
+                  <div>
+                    <ul>
+                      @if (phoneControl?.hasError('required')) {
+                        <li>Phone is required.</li>
+                      } @else if (phoneControl?.hasError('pattern')) {
+                        <li>Please enter valid Egyptian phone number (e.g., 01012345678).</li>
+                      }
+                    </ul>
+                  </div>
+                </div>
+              }
+            </div>
+
+            <!-- Terms -->
+            <div class="flex items-start gap-2">
+              <input id="terms" type="checkbox" class="mt-1 size-4 accent-main-color" />
+              <label for="terms" class="text-xs font-medium leading-5 text-text-color">
+                I agree to the
+                <a href="#" class="font-semibold text-main-color hover:underline">
+                  Terms & Conditions
+                </a>
+              </label>
+            </div>
+            <!-- Submit -->
+            <button
+              type="submit"
+              class="cursor-pointer w-full rounded-xl bg-main-color py-3.5 text-sm font-bold text-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:opacity-90"
+            >
+              Create Account
+            </button>
+          </form>
+          <!-- Login -->
+          <p class="mt-6 text-center text-sm font-medium text-text-color">
+            Already have an account?
+            <a routerLink="/login" class="font-bold text-main-color hover:underline"> Login </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
